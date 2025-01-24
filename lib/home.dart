@@ -16,14 +16,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectIndex = 0;
+  late List<Widget> _pages;
 
-  static const List<Widget> _pages = <Widget>[
-    DashboardPage(),
-    SurveyPage(),
-    QuestionsAPage(),
-    QuestionsBPage(),
-    SummaryPage(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _pages = <Widget>[
+      DashboardPage(),
+      SurveyPage(onPageChanged: _pageChanged),
+      QuestionsAPage(),
+      QuestionsBPage(),
+      SummaryPage(),
+    ];
+  }
 
   static const List<String> _titles = <String>[
     'Dashboard',
@@ -33,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     'Summary',
   ];
 
-  void _PageChanged(int index) {
+  void _pageChanged(int index) {
     setState(() {
       _selectIndex = index;
     });
@@ -47,11 +52,12 @@ class _HomePageState extends State<HomePage> {
         title: Text(_titles.elementAt(_selectIndex)),
       ),
       body: _pages.elementAt(_selectIndex),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _PageChanged(1),
+      floatingActionButton: _selectIndex == 0 
+      ? FloatingActionButton(
+        onPressed: () => _pageChanged(1),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ),
+      ): null,
     );
   }
 }
