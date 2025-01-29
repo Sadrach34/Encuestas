@@ -18,42 +18,77 @@ class QuestionsAPage extends StatefulWidget {
       key: _formKey,
       child: Column(
         children: <Widget>[
+
           Padding(
             padding: EdgeInsets.all(16),
-            child: TextField(
+            child: TextFormField(
               decoration: InputDecoration(hintText: "Cual es tu nombre?"),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Por favor ingresa tu nombre';
+                }
+                return null;
+              },
             ),
           ),
 
           Padding(
             padding: EdgeInsets.all(16),
-            child: TextField(
+            child: TextFormField(
               decoration: InputDecoration(hintText: "Cual es tu telefono?"),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Por favor ingresa tu Telefono';
+                }
+                return null;
+              },
             ),
           ),
 
           Padding(
             padding: EdgeInsets.all(16),
-            child: TextField(
+            child: TextFormField(
               decoration: InputDecoration(hintText: "Cual es tu correo?"),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Por favor ingresa tu Correo';
+                }
+                return null;
+              },
             ),
           ),
 
           Padding(
             padding: EdgeInsets.all(16),
-            child: TextField(
+            child: TextFormField(
               decoration: InputDecoration(hintText: "Cual es tu matricula?"),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Por favor ingresa tu Matricula';
+                }
+                return null;
+              },
             ),
           ),
 
           Padding(
             padding: EdgeInsets.all(16),
-            child: TextField(
+            child: TextFormField(
               decoration: InputDecoration(hintText: "Cual es tu edad?"),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Por favor ingresa tu edad';
+                }
+                return null;
+              },
             ),
           ),
           ElevatedButton(
-            onPressed: () => {widget.onPageChanged(3)},
+            onPressed: () {
+              if(_formKey.currentState!.validate()){
+                widget.onPageChanged(3);
+              }
+              },
             child: const Text('continuar'),
           ),
         ],
