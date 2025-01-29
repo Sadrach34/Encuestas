@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SummaryPage extends StatelessWidget {
-  const SummaryPage({super.key});
+  final Function(int) onPageChanged;
+
+  const SummaryPage({super.key, required this.onPageChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,9 @@ class SummaryPage extends StatelessWidget {
             const Text(
               'Summary',
               style: TextStyle(fontSize: 40),
+            ),
+            ElevatedButton(
+              onPressed: () => {onPageChanged(0)} , child: const Text('Listo'),
             ),
           ],
         ),

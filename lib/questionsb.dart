@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class QuestionsBPage extends StatelessWidget {
-  const QuestionsBPage({super.key});
+  final Function(int) onPageChanged;
 
+  const QuestionsBPage({super.key, required this.onPageChanged});
+  
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -12,6 +14,9 @@ class QuestionsBPage extends StatelessWidget {
             const Text(
               'Questionsb',
               style: TextStyle(fontSize: 40),
+            ),
+            ElevatedButton(
+              onPressed: () => {onPageChanged(4)} , child: const Text('terminar'),
             ),
           ],
         ),

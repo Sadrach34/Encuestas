@@ -24,9 +24,9 @@ class _HomePageState extends State<HomePage> {
     _pages = <Widget>[
       DashboardPage(),
       SurveyPage(onPageChanged: _pageChanged),
-      QuestionsAPage(),
-      QuestionsBPage(),
-      SummaryPage(),
+      QuestionsAPage(onPageChanged: _pageChanged),
+      QuestionsBPage(onPageChanged: _pageChanged),
+      SummaryPage(onPageChanged: _pageChanged),
     ];
   }
 
@@ -48,16 +48,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: _selectIndex != 0
+            ? IconButton(
+                onPressed: () {
+                  _pageChanged(_selectIndex - 1);
+                },
+                icon: Icon(Icons.arrow_back),
+              )
+            : null,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(_titles.elementAt(_selectIndex)),
       ),
       body: _pages.elementAt(_selectIndex),
-      floatingActionButton: _selectIndex == 0 
-      ? FloatingActionButton(
-        onPressed: () => _pageChanged(1),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ): null,
+      floatingActionButton: _selectIndex == 0
+          ? FloatingActionButton(
+              onPressed: () => _pageChanged(1),
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
+            )
+          : null,
     );
   }
 }
