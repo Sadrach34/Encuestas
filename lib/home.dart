@@ -1,4 +1,5 @@
 import 'package:encuestas/dashboard.dart';
+import 'package:encuestas/models/student.dart';
 import 'package:encuestas/questionsa.dart';
 import 'package:encuestas/questionsb.dart';
 import 'package:encuestas/summary.dart';
@@ -6,64 +7,67 @@ import 'package:encuestas/survey.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectIndex = 0;
-  late List<Widget> _pages;
+  int _selectedindex = 0;
+  late Student _student;
 
   @override
-  void initState() {
-    super.initState();
-    _pages = <Widget>[
-      DashboardPage(),
-      SurveyPage(onPageChanged: _pageChanged),
-      QuestionsAPage(onPageChanged: _pageChanged),
-      QuestionsBPage(onPageChanged: _pageChanged),
-      SummaryPage(onPageChanged: _pageChanged),
-    ];
-  }
+@override
+void initState() {
+  super.initState();
+  _student = Student("", "", "", "", "");
+}
 
-  static const List<String> _titles = <String>[
-    'Dashboard',
-    'Survey',
-    'Questions A',
-    'Questions B',
-    'Summary',
+  static const List<String> _names = <String>[
+    "Encuestas",
+    "Dashboard",
+    "Survey",
+    "QuestionsA",
+    "QuestionsB",
+    "Summary",
   ];
 
-  void _pageChanged(int index) {
+  void _pageChange(int index, {Student? student}) {
     setState(() {
-      _selectIndex = index;
+      _selectedindex = index;
+      if (student != null) {
+        _student = student;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      DashboardPage(),
+      SurveyPage(onPageChanged: _pageChange),
+      QuestionAPage(onPageChanged: _pageChange),
+      QuestionBPage(onPageChanged: _pageChange, student: _student),
+      SummaryPage(onPageChanged: _pageChange),
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        leading: _selectIndex != 0
+        leading: _selectedindex != 0
             ? IconButton(
-                onPressed: () {
-                  _pageChanged(_selectIndex - 1);
-                },
-                icon: Icon(Icons.arrow_back),
+                onPressed: () => _pageChange(_selectedindex - 1),
+                icon: const Icon(Icons.arrow_back),
               )
             : null,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(_titles.elementAt(_selectIndex)),
+        title: Text(_names.elementAt(_selectedindex)),
       ),
-      body: _pages.elementAt(_selectIndex),
-      floatingActionButton: _selectIndex == 0
+      body: pages.elementAt(_selectedindex),
+      floatingActionButton: _selectedindex == 0
           ? FloatingActionButton(
-              onPressed: () => _pageChanged(1),
-              tooltip: 'Increment',
+              onPressed: () => _pageChange(1),
+              tooltip: 'Nueva Encuesta',
               child: const Icon(Icons.add),
             )
           : null,
