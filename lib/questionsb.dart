@@ -1,28 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:encuestas/models/student.dart';
+import 'models/student.dart';
 
-class QuestionBPage extends StatelessWidget {
+class QuestionsBPage extends StatelessWidget {
   final Function(int) onPageChanged;
-  final Student student;
+  final Student? student;
 
-  const QuestionBPage(
+  const QuestionsBPage(
       {super.key, required this.onPageChanged, required this.student});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: EdgeInsets.all(16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Nombre: ${student.name}",),
-          Text("Teléfono: ${student.phone}"),
-          Text("Correo: ${student.email}"),
-          Text("Matrícula: ${student.record}"),
-          Text("Edad: ${student.age}"),
-          const SizedBox(height: 20),
+          Text(
+            'Matricula: ${student?.record ?? 'N/A'}',
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            'Nombre: ${student?.name ?? ''}',
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            'Correo: ${student?.email ?? ''}',
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            'Telefono: ${student?.phone ?? ''}',
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            'Edad: ${student?.age ?? ''}',
+            style: TextStyle(fontSize: 20),
+          ),
           ElevatedButton(
             onPressed: () => onPageChanged(4),
-            child: const Text('Terminar'),
+            child: Text('Terminar'),
           ),
         ],
       ),

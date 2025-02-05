@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:encuestas/models/student.dart';
 
 class QuestionAPage extends StatefulWidget {
-  final Function(int, {Student? student}) onPageChanged;
+  final Function(int, Student) onPageChanged;
   const QuestionAPage({super.key, required this.onPageChanged});
 
   @override
@@ -113,7 +113,7 @@ class _QuestionAPageState extends State<QuestionAPage> {
                 );
 
                 // Llamar a la función onPageChangeddd con el student
-                widget.onPageChanged(3, student: student);
+                widget.onPageChanged(3, student);
               }
             },
             child: const Text('Continuar'),
