@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       SurveyPage(onPageChanged: _pageChange),
       QuestionAPage(onPageChanged: _pageChange),
       QuestionsBPage(onPageChanged: _pageChange, student: _student),
-      SummaryPage(onPageChanged: _pageChange)
+      SummaryPage(onPageChanged: _pageChange, student: _student)
     ];
   }
 
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     'Encuesta',
     'Preguntas',
     'Preguntas (cont)',
-    'Resumén'
+    'Summary'
   ];
 
   void _pageChange(int index, [Student? student]) {
@@ -51,6 +51,9 @@ class _HomePageState extends State<HomePage> {
 
         _pages[3] =
             QuestionsBPage(onPageChanged: _pageChange, student: _student);
+
+        _pages[4] =
+            SummaryPage(onPageChanged: _pageChange, student: _student);
       }
     });
   }

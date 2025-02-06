@@ -4,6 +4,24 @@ class Student {
   final String email;
   final String record;
   final String age;
+  final String? horario;
+  final String? carrera;
+  final String? especialidad;
+  final String? promedio;
+  final String? sector;
 
-  const Student(this.name, this.phone, this.email, this.record, this.age);
+  Student(
+    this.name,
+    this.phone,
+    this.email,
+    this.record,
+    this.age,
+    
+    {
+    this.horario,
+    this.carrera,
+    this.especialidad,
+    this.promedio,
+    this.sector,
+  });
 }
